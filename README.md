@@ -4,4 +4,4 @@
 ##pagetop
 pagetopサンプル
 ##marquee
-marqueeタグ、js、cssアニメーションの比較
+marqueeタグ、js、cssアニメーションの比較する。
