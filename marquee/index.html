@@ -8,30 +8,26 @@
 <meta name="description" content="">
 <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
 <style>
-#marquee{
+#marquee_css {
     overflow:hidden;
 }
-#marquee div{
+#marquee_css p {
     width:100%;
     text-align:center;
     display:inline-block;
     white-space:nowrap;
-
     -moz-animation-duration: 20s;
     -moz-animation-name: marquee;
     -moz-animation-iteration-count: infinite;
     -moz-animation-timing-function: linear;
-
     -webkit-animation-duration: 20s;
     -webkit-animation-name: marquee;
     -webkit-animation-iteration-count: infinite;
     -webkit-animation-timing-function: linear;
-
     -ms-animation-duration: 20s;
     -ms-animation-name: marquee;
     -ms-animation-iteration-count: infinite;
     -ms-animation-timing-function: linear;
-
     -o-animation-duration: 20s;
     -o-animation-name: marquee;
     -o-animation-iteration-count: infinite;
@@ -53,27 +49,37 @@
     from {margin-left: 100%; width: 100%; }
     to { margin-left: -100%; width: 100%; }
 }
+#marquee_js {
+	width:100%;
+	overflow:hidden;
+}
+#marquee_js p {
+	margin-right:100%;
+	display:inline-block;
+	white-space:nowrap;
+}
 </style>
 <script>
 $(function(){
-	var myMsg = "サンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプル";
-	myMsg = myMsg + myMsg;
-	var myCnt = 0;
-	setInterval(function(){
-	  $('#marquee_js').text(myMsg.substring(myCnt,myMsg.length));
-	  myCnt = (myCnt == (myMsg.length/2)-1) ? 0 : myCnt+1;
-	},200);
+	function marqueeJs(){
+		var textBox = $("#marquee_js p").width();
+		$("#marquee_js p").css("margin-left","100%");
+		$("#marquee_js p").animate({"margin-left":-textBox +"px"},5000,"linear",marqueeJs);
+	}
+	marqueeJs();
 });
 </script>
 </head>
 <body>
-<p>marqueeタグ</p>
+<h2>marqueeタグ</h2>
 <marquee>サンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプル</marquee>
-<p>javascript</p>
-<p id="marquee_js"></p>
-<p>cssアニメーション</p>
-<div id="marquee">
-    <div>サンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプル</div>
+<h2>javascript</h2>
+<div id="marquee_js">
+	<p>サンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプル</p>
+</div>
+<h2>cssアニメーション</h2>
+<div id="marquee_css">
+    <p>サンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプル</p>
 </div>
 </body>
 </html>
