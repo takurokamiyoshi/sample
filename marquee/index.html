@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>sample</title>
+<meta name="keywords" content="">
+<meta name="description" content="">
+<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+<style>
+#marquee_css {
+    overflow:hidden;
+}
+#marquee_css p {
+    width:100%;
+    text-align:center;
+    display:inline-block;
+    white-space:nowrap;
+    -moz-animation-duration: 20s;
+    -moz-animation-name: marquee;
+    -moz-animation-iteration-count: infinite;
+    -moz-animation-timing-function: linear;
+    -webkit-animation-duration: 20s;
+    -webkit-animation-name: marquee;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+    -ms-animation-duration: 20s;
+    -ms-animation-name: marquee;
+    -ms-animation-iteration-count: infinite;
+    -ms-animation-timing-function: linear;
+    -o-animation-duration: 20s;
+    -o-animation-name: marquee;
+    -o-animation-iteration-count: infinite;
+    -o-animation-timing-function: linear;
+}
+@-webkit-keyframes marquee {
+    from {margin-left: 100%; width: 100%; }
+    to { margin-left: -100%; width: 100%; }
+}
+@-moz-keyframes marquee {
+    from {margin-left: 100%; width: 100%; }
+    to { margin-left: -100%; width: 100%; }
+}
+@-ms-keyframes marquee {
+    from {margin-left: 100%; width: 100%; }
+    to { margin-left: -100%; width: 100%; }
+}
+@-o-keyframes marquee {
+    from {margin-left: 100%; width: 100%; }
+    to { margin-left: -100%; width: 100%; }
+}
+#marquee_js {
+	width:100%;
+	overflow:hidden;
+}
+#marquee_js p {
+	margin-right:100%;
+	display:inline-block;
+	white-space:nowrap;
+}
+</style>
+<script>
+$(function(){
+	function marqueeJs(){
+		var textBox = $("#marquee_js p").width();
+		$("#marquee_js p").css("margin-left","100%");
+		$("#marquee_js p").animate({"margin-left":-textBox +"px"},5000,"linear",marqueeJs);
+	}
+	marqueeJs();
+});
+</script>
+</head>
+<body>
+<h2>marqueeタグ</h2>
+<marquee>サンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプル</marquee>
+<h2>javascript</h2>
+<div id="marquee_js">
+	<p>サンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプル</p>
+</div>
+<h2>cssアニメーション</h2>
+<div id="marquee_css">
+    <p>サンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプル</p>
+</div>
+</body>
+</html>

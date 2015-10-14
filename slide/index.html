@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>sample</title>
+<meta name="keywords" content="">
+<meta name="description" content="">
+<style>
+* {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+}
+#contnet {
+        position: relative;
+}
+#slide {
+        width: 300px;
+        position: relative;
+        overflow: hidden;
+        margin: 15px auto 0;
+}
+#slide .wrap {
+        width: 100000px;
+        position: relative;
+}
+#slide .wrap .area {
+        width: 300px;
+        float: left;
+}
+.prev,
+.next {
+        display: block;
+        width: 30px;
+        height: 30px;
+        position: absolute;
+        top: 156px;
+        background: #000;
+}
+.prev {
+        left: 4px;
+}
+.next {
+        right: 4px;
+}
+.prev:after,
+.prev:before,
+.next:after,
+.next:before {
+        content: '';
+        position: absolute;
+        border-width: 10px;
+        border-color: transparent transparent transparent #fff;
+        border-style: solid;
+        top: 50%;
+        left: 50%;
+        margin: -10px 0 0 -4px;
+}
+.prev:after,
+.prev:before {
+        border-color: transparent #fff transparent transparent;
+        margin-left: -14px;
+}
+.next:after {
+        border-left-color: #000;
+        margin-left: -6px;
+}
+.prev:after {
+        border-right-color: #000;
+        margin-left: -12px;
+}
+.prevArea,
+.nextArea {
+        width: 40px;
+        height: 60px;
+        top: 141px;
+        text-decoration: none;
+        position: absolute;
+}
+.prevArea {
+        left: 0;
+}
+.nextArea {
+        right: 0;
+}
+</style>
+</head>
+<body>
+<div id="contnet">
+        <div id="slide">
+                <div class="wrap">
+                        <div class="area">
+                                <a href="#"><img
+src="http://www.takurokamiyoshi.net/wordpress/wp-content/themes/projectt/images/index/ph_01.jpg"
+width="300" alt=""></a>
+                        </div>
+                        <!-- /.area -->
+                        <div class="area">
+                                <a href="#"><img
+src="http://www.takurokamiyoshi.net/wordpress/wp-content/themes/projectt/images/index/ph_02.jpg"
+width="300" alt=""></a>
+                        </div>
+                        <!-- /.area -->
+                        <div class="area">
+                                <a href="#"><img
+src="http://www.takurokamiyoshi.net/wordpress/wp-content/themes/projectt/images/index/ph_03.jpg"
+width="300" alt=""></a>
+                        </div>
+                        <!-- /.area -->
+                </div>
+        </div>
+        <a href="javascript:void(0);" class="prev"></a>
+        <a href="javascript:void(0);" class="next"></a>
+        <a href="javascript:void(0);" class="prevArea"></a>
+        <a href="javascript:void(0);" class="nextArea"></a>
+</div>
+<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script>
+(function(){
+        var slide = {
+                defaults:{
+                        slide: $('#slide'),
+                        wrap: $('#slide .wrap'),
+                        area: $('#slide .area'),
+                        prev: $('.prevArea'),
+                        next: $('.nextArea')
+                },
+                init:function() {
+                        var self = this;
+                        var defaults = this.defaults;
+
+                        defaults.prev.click(function(){
+                                self.prev();
+                        });
+                        defaults.next.click(function(){
+                                self.next();
+                        });
+                        self.swipe();
+                },
+                prev: function(){
+                        var self = this;
+                        var defaults = this.defaults;
+                        $('.wrap:not(:animated)', defaults.slide)
+                                .css('margin-left', -1 * defaults.area.width())
+                                .prepend($('.area:last-child', defaults.slide))
+                                .animate({
+                                'margin-left' : 0
+                        },function(){
+                        });
+                },
+                next: function(){
+                        var self = this;
+                        var defaults = this.defaults;
+                        $('.wrap:not(:animated)', defaults.slide).animate({
+                                'margin-left' : -1 * defaults.area.width()
+                        },function(){
+                                defaults.wrap.css('margin-left','0').append($('.area:first-child',
+defaults.slide));
+                        });
+                },
+                swipe: function(){
+                        var self = this;
+                        var defaults = this.defaults;
+                        defaults.wrap.on('touchstart',function(){
+                                $(this)
+                                        .data('startX',event.touches[0].pageX)
+                                        .data('startY',event.touches[0].pageY)
+                                        .data('moveX',0)
+                                        .data('moveY',0);
+                        }).on('touchmove',function(){
+                                if (Math.abs(event.touches[0].pageX - $(this).data('startX')) > 10
+&& Math.abs(event.touches[0].pageY - $(this).data('startY')) < 10) {
+                                        event.preventDefault();
+                                        $(this)
+                                                .data('moveX',event.touches[0].pageX-$(this).data('startX'))
+                                                .data('moveY',event.touches[0].pageY-$(this).data('startY'));
+                                }
+                        }).on('touchend',function(){
+                                if($(this).data('moveX') > 20){
+                                        self.prev();
+                                }else if($(this).data('moveX') < -20){
+                                        self.next();
+                                }else if($(this).data('moveY') > -20 && $(this).data('moveY') < 20){
+                                        // タップ
+                                }
+                        });
+                }
+        };
+        slide.init();
+})();
+</script>
+</body>
+</html>
