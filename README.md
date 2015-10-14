@@ -5,3 +5,5 @@
 pagetopサンプル
 ##marquee
 marqueeタグ、js、cssアニメーションの比較する。
+##slide
+スワイプ対応画像スライドギャラリー
