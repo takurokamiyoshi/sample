@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="http://fb.me/react-0.13.3.js"></script>
+<script src="http://fb.me/JSXTransformer-0.13.3.js"></script>
+</head>
+<body>
+<div id="app"></div>
+<script type="text/jsx">
+var Positioner = React.createClass({
+	getInitialState: function(){ return {positon: 10}; },
+
+	resolveAnimationFrame: function(){
+		var timestamp = new Date();
+		var timeRemaining = Math.max(0,
+			this.props.animationCompleteTimestamp - timestamp);
+
+		if(timeRemaining > 0){
+			this.setState({positon: timeRemaining});
+		}
+	},
+
+	componentWillUpdate: function(){
+		if(this.props.animationCompleteTimestamp){
+			requestAnimationFrame(this.resolveAnimationFrame);
+		}
+	},
+
+	render: function(){
+		var divStyle = {left: this.state.positon};
+
+		return <div style={divStyle}>sample</div>
+	}
+});
+var m = React.render(<Positioner />, document.getElementById('app'));
+</script>
+</body>
+</html>
