@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>sample</title>
+<meta name="keywords" content="">
+<meta name="description" content="">
+</head>
+<body>
+<div id="content">
+        <form>
+                <input id="textArea" type="text" size="40" value="">
+        </form>
+        <ul id="list">
+                <li><a href="#">あああ</a></li>
+                <li><a href="#">あああ</a></li>
+                <li><a href="#">あいい</a></li>
+                <li><a href="#">いいい</a></li>
+                <li><a href="#">かかか</a></li>
+                <li><a href="#">かかあ</a></li>
+                <li><a href="#">ききき</a></li>
+                <li><a href="#">さささ</a></li>
+                <li><a href="#">ししし</a></li>
+                <li><a href="#">たたた</a></li>
+                <li><a href="#">ちちち</a></li>
+                <li><a href="#">ななな</a></li>
+                <li><a href="#">ないい</a></li>
+                <li><a href="#">ややや</a></li>
+                <li><a href="#">やああ</a></li>
+                <li><a href="#">わわわ</a></li>
+        </ul>
+</div>
+<!-- /#content -->
+<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script>
+(function(){
+        var textSearch = {
+                init: function(){
+                        var self = this;
+                        self.textChange();
+                },
+                textChange: function(){
+                        var self = this;
+                        var defaults = this.defaults;
+                        var tx = "";
+                        $(document).on('input', '#textArea', function() {
+                                tx = $(this).val();
+                                $('#list li').each(function(){
+                                        if($(this).is(':contains(' + tx + ')')){
+                                                $(this).show();
+                                        } else {
+                                                $(this).hide();
+                                        }
+                                });
+                        });
+                }
+        }
+        textSearch.init();
+})();
+</script>
+</body>
+</html>
